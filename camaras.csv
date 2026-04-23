@@ -1,0 +1,51 @@
+ID,Estado,Año_Instalacion,Ciudad,Resolucion,Marca
+CAM-001,Activa,2022,Ciudad de Mexico,4K,Hikvision
+CAM-002,Activa,2019,Monterrey,1080p,Dahua
+CAM-003,Inactiva,2018,Ciudad de Mexico,720p,Axis
+CAM-004,Mantenimiento,2023,Guadalajara,4K,Bosch
+CAM-005,Activa,2020,Puebla,1080p,Hikvision
+CAM-006,Activa,2021,Tijuana,2K,Pelco
+CAM-007,Inactiva,2017,Ciudad de Mexico,1080p,Dahua
+CAM-008,Activa,2024,Monterrey,4K,Axis
+CAM-009,Activa,2019,Cancun,1080p,Bosch
+CAM-010,Mantenimiento,2022,Ciudad de Mexico,4K,Hikvision
+CAM-011,Activa,2020,Guadalajara,1080p,Dahua
+CAM-012,Activa,2016,Puebla,720p,Pelco
+CAM-013,Inactiva,2021,Monterrey,2K,Axis
+CAM-014,Activa,2023,Ciudad de Mexico,4K,Bosch
+CAM-015,Activa,2018,Tijuana,1080p,Hikvision
+CAM-016,Mantenimiento,2019,Cancun,1080p,Dahua
+CAM-017,Activa,2024,Guadalajara,4K,Axis
+CAM-018,Inactiva,2015,Ciudad de Mexico,720p,Pelco
+CAM-019,Activa,2022,Puebla,2K,Bosch
+CAM-020,Activa,2020,Monterrey,1080p,Hikvision
+CAM-021,Activa,2023,Ciudad de Mexico,4K,Dahua
+CAM-022,Mantenimiento,2021,Tijuana,1080p,Axis
+CAM-023,Activa,2017,Cancun,720p,Bosch
+CAM-024,Inactiva,2019,Guadalajara,1080p,Pelco
+CAM-025,Activa,2024,Ciudad de Mexico,4K,Hikvision
+CAM-026,Activa,2022,Monterrey,2K,Dahua
+CAM-027,Activa,2020,Puebla,1080p,Axis
+CAM-028,Mantenimiento,2018,Ciudad de Mexico,1080p,Bosch
+CAM-029,Inactiva,2016,Tijuana,720p,Hikvision
+CAM-030,Activa,2023,Cancun,4K,Pelco
+CAM-031,Activa,2021,Guadalajara,1080p,Dahua
+CAM-032,Activa,2019,Ciudad de Mexico,2K,Axis
+CAM-033,Mantenimiento,2024,Monterrey,4K,Bosch
+CAM-034,Inactiva,2020,Puebla,1080p,Hikvision
+CAM-035,Activa,2017,Ciudad de Mexico,720p,Pelco
+CAM-036,Activa,2022,Tijuana,1080p,Dahua
+CAM-037,Activa,2023,Cancun,4K,Axis
+CAM-038,Mantenimiento,2018,Guadalajara,1080p,Bosch
+CAM-039,Inactiva,2021,Ciudad de Mexico,2K,Hikvision
+CAM-040,Activa,2019,Monterrey,1080p,Pelco
+CAM-041,Activa,2024,Puebla,4K,Dahua
+CAM-042,Activa,2020,Ciudad de Mexico,1080p,Axis
+CAM-043,Mantenimiento,2016,Tijuana,720p,Bosch
+CAM-044,Inactiva,2022,Cancun,1080p,Hikvision
+CAM-045,Activa,2023,Guadalajara,4K,Pelco
+CAM-046,Activa,2018,Ciudad de Mexico,1080p,Dahua
+CAM-047,Activa,2021,Monterrey,2K,Axis
+CAM-048,Mantenimiento,2019,Puebla,1080p,Bosch
+CAM-049,Inactiva,2017,Tijuana,720p,Hikvision
+CAM-050,Activa,2024,Ciudad de Mexico,4K,Pelco
