@@ -1,9 +1,13 @@
-import tkinter as tk
+import customtkinter as ctk
 from tkinter import ttk, messagebox
 import pandas as pd
 import os
+#pip install customtkinter spyder-kernels
+#pip install pandas
+ctk.set_appearance_mode("Dark")
+ctk.set_default_color_theme("blue")
 
-class SistemaCamaras(tk.Tk):
+class SistemaCamaras(ctk.CTk):
     def __init__(self):
         super().__init__()
 
@@ -49,29 +53,27 @@ class SistemaCamaras(tk.Tk):
         self.frame_dashboard.grid(row=0, column=0, sticky="nsew")
 
 
-class FrameLogin(tk.Frame):
+class FrameLogin(ctk.CTkFrame):
     def __init__(self, master, login_callback):
-        super().__init__(master)
+        super().__init__(master, fg_color="transparent")
         self.login_callback = login_callback
 
-        self.contenedor = tk.Frame(self, bd=2, relief="groove", padx=40, pady=40)
+        self.contenedor = ctk.CTkFrame(self, width=300, height=400, corner_radius=15)
         self.contenedor.place(relx=0.5, rely=0.5, anchor="center")
 
-        self.label_titulo = tk.Label(self.contenedor, text="Iniciar Sesión", font=("Helvetica", 20, "bold"))
-        self.label_titulo.pack(pady=(0, 20))
+        self.label_titulo = ctk.CTkLabel(self.contenedor, text="Iniciar Sesión", font=ctk.CTkFont(size=24, weight="bold"))
+        self.label_titulo.pack(pady=(40, 20))
 
-        tk.Label(self.contenedor, text="Usuario:", font=("Helvetica", 10)).pack(anchor="w")
-        self.entry_usuario = tk.Entry(self.contenedor, width=30, font=("Helvetica", 12))
-        self.entry_usuario.pack(pady=(0, 15))
+        self.entry_usuario = ctk.CTkEntry(self.contenedor, placeholder_text="Usuario", width=220)
+        self.entry_usuario.pack(pady=10)
 
-        tk.Label(self.contenedor, text="Contraseña:", font=("Helvetica", 10)).pack(anchor="w")
-        self.entry_password = tk.Entry(self.contenedor, show="*", width=30, font=("Helvetica", 12))
-        self.entry_password.pack(pady=(0, 20))
+        self.entry_password = ctk.CTkEntry(self.contenedor, placeholder_text="Contraseña", show="*", width=220)
+        self.entry_password.pack(pady=10)
 
-        self.btn_login = tk.Button(self.contenedor, text="Acceder", command=self.intento_login, width=20, bg="#0052cc", fg="white", font=("Helvetica", 10, "bold"))
-        self.btn_login.pack(pady=(10, 20))
+        self.btn_login = ctk.CTkButton(self.contenedor, text="Acceder", command=self.intento_login, width=220)
+        self.btn_login.pack(pady=(20, 40))
 
-        self.label_error = tk.Label(self.contenedor, text="", fg="red")
+        self.label_error = ctk.CTkLabel(self.contenedor, text="", text_color="red")
         self.label_error.pack()
 
     def intento_login(self):
@@ -79,10 +81,10 @@ class FrameLogin(tk.Frame):
         pwd = self.entry_password.get()
         exito, msg = self.login_callback(usr, pwd)
         if not exito:
-            self.label_error.config(text=msg)
+            self.label_error.configure(text=msg)
 
 
-class FrameDashboard(tk.Frame):
+class FrameDashboard(ctk.CTkFrame):
     def __init__(self, master, df):
         super().__init__(master)
         self.df = df
@@ -90,11 +92,11 @@ class FrameDashboard(tk.Frame):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
-        self.sidebar = tk.Frame(self, width=250, bg="#e0e0e0", relief="sunken", bd=1)
+        self.sidebar = ctk.CTkFrame(self, width=250, corner_radius=0)
         self.sidebar.grid(row=0, column=0, sticky="nsew")
         self.sidebar.grid_propagate(False)
 
-        titulo_sidebar = tk.Label(self.sidebar, text="Consultas de Red", font=("Helvetica", 16, "bold"), bg="#e0e0e0")
+        titulo_sidebar = ctk.CTkLabel(self.sidebar, text="Consultas de Red", font=ctk.CTkFont(size=18, weight="bold"))
         titulo_sidebar.pack(pady=20, padx=10)
 
         self.consultas = {
@@ -110,34 +112,41 @@ class FrameDashboard(tk.Frame):
             "10. Reporte crítico (Inactivas/Mant)": lambda: self.df[self.df['Estado'].isin(['Inactiva', 'Mantenimiento'])]
         }
 
-        self.opcion_var = tk.StringVar(value="Seleccionar consulta...")
-        
-        self.menu_consultas = ttk.Combobox(
+        self.opcion_var = ctk.StringVar(value="Seleccionar consulta...")
+        self.menu_consultas = ctk.CTkOptionMenu(
             self.sidebar, 
-            textvariable=self.opcion_var, 
-            values=list(self.consultas.keys()),
-            state="readonly",
-            width=28
+            values=list(self.consultas.keys()), 
+            variable=self.opcion_var,
+            command=self.ejecutar_consulta,
+            width=220
         )
         self.menu_consultas.pack(pady=10, padx=10)
-        self.menu_consultas.bind("<<ComboboxSelected>>", lambda event: self.ejecutar_consulta(self.opcion_var.get()))
 
-        self.main_frame = tk.Frame(self, padx=20, pady=20)
-        self.main_frame.grid(row=0, column=1, sticky="nsew")
+        self.main_frame = ctk.CTkFrame(self, corner_radius=10)
+        self.main_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
         
-        self.lbl_resultado = tk.Label(self.main_frame, text="Esperando consulta...", font=("Helvetica", 14))
+        self.lbl_resultado = ctk.CTkLabel(self.main_frame, text="Esperando consulta...", font=ctk.CTkFont(size=16))
         self.lbl_resultado.pack(pady=10)
 
-        self.tree = ttk.Treeview(self.main_frame, show="headings")
+        style = ttk.Style()
+        style.theme_use("default")
+        style.configure("Treeview", background="#2b2b2b", foreground="white", rowheight=30, fieldbackground="#2b2b2b", borderwidth=0)
+        style.map('Treeview', background=[('selected', '#1f538d')])
+        style.configure("Treeview.Heading", background="#1f538d", foreground="white", font=('Helvetica', 10, 'bold'))
+
+        self.tree_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
+        self.tree_frame.pack(expand=True, fill="both", padx=10, pady=10)
+
+        self.tree = ttk.Treeview(self.tree_frame, show="headings")
         
-        scrollbar = ttk.Scrollbar(self.main_frame, orient="vertical", command=self.tree.yview)
-        self.tree.configure(yscrollcommand=scrollbar.set)
+        self.scrollbar = ttk.Scrollbar(self.tree_frame, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=self.scrollbar.set)
         
-        scrollbar.pack(side="right", fill="y")
-        self.tree.pack(expand=True, fill="both")
+        self.scrollbar.pack(side="right", fill="y")
+        self.tree.pack(side="left", expand=True, fill="both")
 
     def ejecutar_consulta(self, seleccion):
-        self.lbl_resultado.config(text=f"Mostrando: {seleccion}")
+        self.lbl_resultado.configure(text=f"Mostrando: {seleccion}")
         
         for item in self.tree.get_children():
             self.tree.delete(item)
